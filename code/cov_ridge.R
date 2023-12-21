@@ -1,3 +1,5 @@
+## ID: cov_ridge.R, last updated 2023-12-21, F.Osorio
+
 vcov.ridge <- function(model)
 { # return the covariance matrix (and its determinant) for the ridge estimator
   obj <- model

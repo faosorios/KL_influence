@@ -1,4 +1,4 @@
-## LD_influence.R
+## ID: LD_influence.R, last updated 2023-12-21, F.Osorio
 
 curvature.LD.ridge <- function(object, scheme = "scale")
 { 

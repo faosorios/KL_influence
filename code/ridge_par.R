@@ -1,3 +1,5 @@
+## ID: ridge_par.R, last updated 2023-12-21, F.Osorio
+
 ridge.par <- function(object)
 { 
   nobs <- object$dims[1]

@@ -1,4 +1,4 @@
-# KL_influence.R
+## ID: KL_influence.R, last updated 2023-12-21, F.Osorio
 
 KL.divergence.ridge <- function(model) 
 { ## Kullback-Liebler divergence for ridge regression
