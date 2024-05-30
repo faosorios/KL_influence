@@ -85,6 +85,16 @@ LD <- logLik.displacement(fm, pars = "coef")
 lev <- leverages(fm)
 rel <- relative.condition(x)
 
+rel # relative condition (reported in Section 4.1)
+#           1            2            3            4            5            6 
+# 0.036498473 -0.001126192  0.376952965 -0.002284163 -0.029407540 -0.039380700 
+#           7            8            9           10           11           12 
+#-0.035649700 -0.012596178  0.029996258  0.001835695  0.008286249  0.001986670 
+#          13 
+# 0.003488182 
+#attr(,"scaled condition")
+#[1] 249.5783
+
 ## selected value for the shrinkage parameter
 lambda <- ridge.par(fm)
 
@@ -102,39 +112,27 @@ plot(LD, ylab = "Penalized likelihood displacement", ylim = c(0,2.5), lwd = 2, c
 text(8, LD[8], label = as.character(8), pos = 3)
 
 ## Figure 1(c)
-par(pty = "s")
-plot(z$hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
-text(8, z$hmax[8], label = as.character(8), pos = 3)
-
-## Figure 1(d)
-par(pty = "s")
-plot(lambda, ylab = "GCV selection of lambda", ylim = c(1.25,2.41), lwd = 2, cex.lab = 1.3)
-abline(h = fm$lambda, lwd = 2, lty = 2, col = "red")
-text(8, lambda[8], label = as.character(8), pos = 3)
-
-## Figure 1(e)
 cutoff <- 2 * mean(lev)
 par(pty = "s")
 plot(lev, ylab = "Leverages", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
 abline(h = cutoff, lwd = 2, lty = 2, col = "red")
 text(10, lev[10], label = as.character(10), pos = 3)
 
-## Figure 1(f)
+## Figure 1(d)
 par(pty = "s")
-plot(rel, ylab = "Relative condition number", ylim = c(-0.04,0.4), lwd = 2, cex.lab = 1.3)
-abline(h = 0, lwd = 2, lty = 2, col = "red")
-text(3, rel[3], label = as.character(3), pos = 3)
+plot(z$hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
+text(8, z$hmax[8], label = as.character(8), pos = 3)
 
 ## entropy-based influence measures for ridge regression
 KL <- KL.divergence.ridge(fm)
 z <- curvature.KL.ridge(fm)
 
-## Figure 2(a)
+## Figure 1(e)
 par(pty = "s")
 plot(KL, ylab = "KL divergence", ylim = c(0,5), lwd = 2, cex.lab = 1.3)
 text(10, KL[10], label = as.character(10), pos = 3)
 
-## Figure 2(b)
+## Figure 1(f)
 par(pty = "s")
 plot(z$hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
 text(3, z$hmax[3], label = as.character(3), pos = 3)
