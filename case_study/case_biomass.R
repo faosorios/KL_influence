@@ -1,6 +1,5 @@
 ## ID: case_biomass.R, last updated 2024-03-27, F.Osorio
 
-
 ## loading dataset
 biomass <- read.csv("../data/biomass.csv") 
 ## or loading a RDA file 
@@ -31,7 +30,7 @@ hmax <- z$hmax
 KL <- KL.divergence.ridge(fm)
 z <- curvature.KL.ridge(fm)
 
-## Fig. 3.a
+## Fig. 2.a
 obs <- c(12,14,29,34)
 pdf()
 par(pty = "s")
@@ -39,14 +38,14 @@ plot(CD, ylab = "Cook's distances", ylim = c(0,.17), lwd = 2, cex.lab = 1.3)
 text(obs, CD[obs], label = as.character(obs), pos = 3)
 dev.off()
 
-## Fig. 3.b
+## Fig. 2.b
 pdf()
 par(pty = "s")
 plot(LD, ylab = "Penalized likelihood displacement", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
 text(obs, LD[obs], label = as.character(obs), pos = 3)
 dev.off()
 
-## Fig. 3.c
+## Fig. 2.c
 cutoff <- 2 * mean(levs)
 pdf()
 par(pty = "s")
@@ -55,7 +54,7 @@ abline(h = cutoff, lwd = 2, lty = 2, col = "red")
 text(5, lev[5], label = as.character(5), pos = 3)
 dev.off()
 
-## Fig. 3.d
+## Fig. 2.d
 obs <- c(33,34)
 pdf()
 par(pty = "s")
@@ -63,14 +62,14 @@ plot(hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
 text(obs, hmax[obs], label = as.character(obs), pos = 3)
 dev.off()
 
-## Fig. 3.e
+## Fig. 2.e
 pdf()
 par(pty = "s")
 plot(KL, ylab = "KL divergence", ylim = c(0,4), lwd = 2, cex.lab = 1.3)
 text(5, KL[5], label = as.character(5), pos = 3)
 dev.off()
 
-## Fig. 3.f
+## Fig. 2.f
 obs <- 29:30
 pdf()
 par(pty = "s")
