@@ -6,9 +6,9 @@
 
 Supplementary material to **Influence diagnostics for ridge regression based on the Kullback-Leibler divergence** by Alonso Ogueda and Felipe Osorio (Statistical Papers, Accepted)
 
-Code tested on R under development (2022-01-27 r81578), running Linux Zorin 16 (64 bits)
+Code tested on R under development (2025-02-20 r87772), running Linux Mint 22.1 (64 bits)
 
-Attached packages: fastmatrix 0.5-77, india 0.1
+Attached packages: fastmatrix 0.5-7721, india 0.1
 
 CONTENTS:
 - case_study/case_Portland.R: R commands for the analysis of Portland cement dataset (described/analyzed at Section 4.2.1 from manuscript).
