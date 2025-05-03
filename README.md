@@ -4,7 +4,7 @@
 [![fastmatrix](https://img.shields.io/badge/fastmatrix-0.5--7721-orange)](https://cran.r-project.org/package=fastmatrix)
 [![india](https://img.shields.io/badge/india-0.1-orange)](https://cran.r-project.org/package=india)
 
-Supplementary material to **Influence diagnostics for ridge regression based on the Kullback-Leibler divergence** by Alonso Ogueda and Felipe Osorio (Statistical Papers, Accepted)
+Supplementary material to **Influence diagnostics for ridge regression based on the Kullback-Leibler divergence** by Alonso Ogueda and Felipe Osorio (Statistical Papers 66, 85. DOI: [10.1007/s00362-025-01701-1](https://doi.org/10.1007/s00362-025-01701-1))
 
 Code tested on R under development (2025-02-20 r87772), running Linux Mint 22.1 (64 bits)
 
