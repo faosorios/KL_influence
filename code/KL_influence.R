@@ -138,7 +138,7 @@ explanatory.KL.ridge <- function(object, which = 2)
   E0 <- matrix(0, nrow = p, ncol = p)
   E0[k,k] <- 1
 
-  # curvature under scale perturbation
+  # curvature under explanatory variable perturbation
   term1 <- R[k,k] * P - 2 * (R[k,k] * H + U %*% E0 %*% t(V)) %*% P %*% Q
   term1 <- (a2 / s2) * term1
   term2 <- (L[k,k] + m[k]^2 / s2 + R[k,k]^2) * H0
