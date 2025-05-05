@@ -1,4 +1,4 @@
-## ID: KL_influence.R, last updated 2023-12-21, F.Osorio
+## ID: KL_influence.R, last updated 2025-03-31, F.Osorio
 
 KL.divergence.ridge <- function(model) 
 { ## Kullback-Liebler divergence for ridge regression
@@ -83,6 +83,69 @@ curvature.KL.ridge <- function(object)
   B <- transition(n = n)
   curv <- (term1 - term2 + term3 - term4 + term5) %*% B
   curv <- crossprod(B, curv)
+  curv <- asSymmetric(curv) # just a safeguard
+  scaling <- sqrt(sum(diag(crossprod(curv))))
+  curv <- curv / scaling
+  
+  # compute largest eigenvectors and create the output object
+  rs <- svd(curv, nv = 0)
+  which <- abs(rs$d) < .Machine$double.eps
+  hmax <- rs$u[,1]
+
+  out <- list(hmax = abs(hmax), vectors = rs$u[,!which])
+  out
+}
+
+explanatory.KL.ridge <- function(object, which = 2)
+{ 
+  y <- model.response(object$model, "numeric")
+  x <- model.matrix(object$terms, object$model, object$contrast)
+  n <- nrow(x)
+  p <- ncol(x)
+  k <- which
+
+  # scales 
+  scales <- equilibrate(x)
+  scales <- attr(scales, "scales")
+  a2 <- scales[k]^2
+
+  # SVD of model matrix
+  rs <- svd(x, nv = 0)
+
+  # extracting ridge elements
+  lambda <- object$lambda
+  res <- object$residuals
+  yfit <- object$fitted
+  s2 <- object$scale
+
+  # computing H and H(lambda)
+  div <- rs$d^2 + lambda
+  Delta <- rs$d^2 / div
+  u <- rs$u %*% diag(sqrt(Delta))
+  H  <- tcrossprod(u)
+  H0 <- tcrossprod(rs$u)
+
+  Id <- diag(n)
+  xx <- crossprod(x)
+  S <- xx + diag(lambda, p)
+  R <- solve(xx)
+  L <- solve(S, xx) %*% solve(S)
+  m <- solve(S, crossprod(x, yfit))
+  P <- outer(yfit, yfit)
+  Q <- Id - .5 * H
+  U <- x %*% R
+  V <- x %*% solve(S)
+  E0 <- matrix(0, nrow = p, ncol = p)
+  E0[k,k] <- 1
+
+  # curvature under scale perturbation
+  term1 <- R[k,k] * P - 2 * (R[k,k] * H + U %*% E0 %*% t(V)) %*% P %*% Q
+  term1 <- (a2 / s2) * term1
+  term2 <- (L[k,k] + m[k]^2 / s2 + R[k,k]^2) * H0
+  term2 <- term2 - 2 * R[k,k] * H %*% Q  + 2 * V %*% E0 %*% t(V)
+  term2 <- term2 + U %*% E0 %*% (t(U) - 4 * t(V) %*% Q)
+  term2 <- a2 * term2
+  curv <- term1 + term2
   curv <- asSymmetric(curv) # just a safeguard
   scaling <- sqrt(sum(diag(crossprod(curv))))
   curv <- curv / scaling
