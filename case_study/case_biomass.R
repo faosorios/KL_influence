@@ -120,6 +120,46 @@ text(15, u[15,6], label = as.character(15), pos = 3)
 text(c(28,29), u[28:29,4], label = as.character(28:29), pos = 3)
 text(27, u[27,4], label = as.character(27), pos = 1)
 
+## Fig. 9(a)
+z2 <- explanatory.KL.ridge(fm, which = 2)
+hmax <- z2$hmax
+cutoff <- mean(hmax) + 2 * sd(hmax)
+par(pty = "s")
+plot(hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
+abline(h = cutoff, lty = 2, lwd = 2, col = "red")
+text(28:29, hmax[28:29], label = as.character(28:29), pos = 3)
+text(27, hmax[27], label = as.character(27), pos = 1)
+
+## Fig. 9(b)
+z4 <- explanatory.KL.ridge(fm, which = 4)
+hmax <- z4$hmax
+cutoff <- mean(hmax) + 2 * sd(hmax)
+obs <- (1:45)[hmax > cutoff]
+par(pty = "s")
+plot(hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
+abline(h = cutoff, lty = 2, lwd = 2, col = "red")
+text(obs, hmax[obs], label = as.character(obs), pos = 3)
+
+## Fig. 9(c)
+z5 <- explanatory.KL.ridge(fm, which = 5)
+hmax <- z5$hmax
+cutoff <- mean(hmax) + 2 * sd(hmax)
+obs <- (1:45)[hmax > cutoff]
+par(pty = "s")
+plot(hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
+abline(h = cutoff, lty = 2, lwd = 2, col = "red")
+text(obs, hmax[obs], label = as.character(obs), pos = 3)
+
+## Fig. 9(d)
+z6 <- explanatory.KL.ridge(fm, which = 6)
+hmax <- z6$hmax
+cutoff <- mean(hmax) + 2 * sd(hmax)
+obs <- (1:45)[hmax > cutoff]
+par(pty = "s")
+plot(hmax, ylab = "hmax", ylim = c(0,1), lwd = 2, cex.lab = 1.3)
+abline(h = cutoff, lty = 2, lwd = 2, col = "red")
+text(obs, hmax[obs], label = as.character(obs), pos = 3)
+
 ## removing individual observations 5, 7, 11, 12, 14, 15, 29, 30, 33 and 34
 nobs <- nrow(x)
 rm05 <- rm07 <- rm11 <- rm12 <- rm14 <- rm15 <- rm29 <- rm30 <- rm33 <- rm34 <- rep(TRUE, nobs)
